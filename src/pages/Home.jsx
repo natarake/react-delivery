@@ -23,7 +23,7 @@ const Home = () => {
         </div>
       ) : error ? (
         <div className="flex justify-center items-center h-[10em] w-screen mt-10">
-          <Error error={error} />
+          <Error />
         </div>
       ) : (
         pizzas.map((pizza) => <Pizza pizza={pizza} key={pizza._id} />)

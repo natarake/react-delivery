@@ -18,7 +18,6 @@ const Login = () => {
     };
     dispatch(login(user));
     navigate("/");
-    alert(`welcome ${username}`);
   };
 
   return (

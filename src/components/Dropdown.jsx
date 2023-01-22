@@ -1,13 +1,17 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../redux/apiCalls";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Dropdown = ({ currentUser }) => {
+  const dispatch = useDispatch();
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -51,6 +55,9 @@ const Dropdown = ({ currentUser }) => {
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block w-full px-4 py-2 text-left text-sm"
                   )}
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
                 >
                   Sign out
                 </button>

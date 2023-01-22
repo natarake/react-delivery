@@ -52,6 +52,7 @@ export const register = (user) => async (dispatch) => {
     dispatch({ type: "REGISTER_USER_FAILED", payload: error });
   }
 };
+
 export const login = (user) => async (dispatch) => {
   dispatch({ type: "LOGIN_USER_REQUEST" });
   try {
@@ -65,4 +66,9 @@ export const login = (user) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: "LOGIN_USER_FAILED", payload: error });
   }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("currentUser");
+  window.location.href = "/login";
 };
