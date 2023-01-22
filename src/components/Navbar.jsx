@@ -3,6 +3,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Dropdown from "./Dropdown";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -12,6 +13,8 @@ const Navbar = () => {
   };
 
   const cartstate = useSelector((state) => state.cartReducer);
+  const userstate = useSelector((state) => state.loginReducer);
+  const { currentUser } = userstate;
 
   return (
     <>
@@ -31,11 +34,19 @@ const Navbar = () => {
                 </div>
               </li>
             </Link>
-            <Link to="/login">
+            {currentUser ? (
               <li className="p-4 cursor-pointer text-gray-600 font-bold">
-                Log In
+                <span className="underline italic text-blue-500">
+                  <Dropdown currentUser={currentUser} />
+                </span>
               </li>
-            </Link>
+            ) : (
+              <Link to="/login">
+                <li className="p-4 cursor-pointer text-gray-600 font-bold">
+                  Log In
+                </li>
+              </Link>
+            )}
           </ul>
           <div onClick={handleNav} className="block md:hidden">
             {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}

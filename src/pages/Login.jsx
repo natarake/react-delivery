@@ -1,21 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
+import { login } from "../redux/apiCalls";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    const user = {
+      username,
+      password,
+    };
+    dispatch(login(user));
+    navigate("/");
+    alert(`welcome ${username}`);
+  };
+
   return (
     <div className="flex justify-center items-center h-screen bg-[#e5e0ffa0]">
-      <div className="flex justify-center items-center h-2/3 bg-slate-100 shadow-2xl">
+      <div className="flex justify-center items-center h-2/3 shadow-2xl">
         <div className="relative w-3/5 h-full hidden md:flex flex-col ">
           <img
-            src="https://img.freepik.com/premium-vector/set-food-drink-vector-illustration-food-drink-cartoon-food-lunch_691616-18.jpg"
+            src="https://img.freepik.com/premium-vector/set-cartoon-fast-food-illustratio_530597-17.jpg?w=2000"
             alt=""
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="w-full md:w-2/5 h-full bg-slate-100 flex flex-col p-8 justify-between">
+        <div className="w-full md:w-2/5 h-full bg-[#f8f6fcc8] flex flex-col p-8 justify-between">
           <h1 className="font-extrabold text-transparent text-3xl bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
             FoodTrip.
           </h1>
@@ -24,16 +40,21 @@ const Login = () => {
             <input
               type="text"
               placeholder="Username"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full border-b border-[#060606] bg-transparent py-2 my-2 outline-none focus:outline-none"
+              className="w-full border-[#e5e0ff] bg-transparent py-2 my-2 focus:outline-none focus:border-[#c6bcfd] focus:ring-1 focus:ring-[#c6bcfd] cursor-pointer"
             />
             <input
               type="password"
               placeholder="Password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border-b border-[#060606] bg-transparent py-2 my-2 outline-none focus:outline-none"
+              className="w-full border-[#e5e0ff] bg-transparent py-2 my-2 focus:outline-none focus:border-[#c6bcfd] focus:ring-1 focus:ring-[#c6bcfd] cursor-pointer"
             />
-            <button className="my-3 border bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-3 py-1 rounded-xl tracking-wide">
+            <button
+              onClick={handleLogin}
+              className="my-3 border bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-3 py-1 rounded-xl tracking-wide"
+            >
               Log In
             </button>
             <div className="flex items-center justify-center relative py-2">
